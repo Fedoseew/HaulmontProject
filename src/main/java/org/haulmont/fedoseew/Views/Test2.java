@@ -2,20 +2,23 @@ package org.haulmont.fedoseew.Views;
 
 import javax.annotation.PostConstruct;
 
+import com.vaadin.spring.annotation.UIScope;
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-@SpringView(name = "")
-public class DefaultView extends VerticalLayout implements View {
+@UIScope
+@SpringView(name = "Test2")
+public class Test2 extends VerticalLayout implements View {
+
 
     @PostConstruct
     void init() {
-        Label label = new Label("Deafult View");
-        label.setWidth("50%");
-        addComponent(label);
+        addComponent(new Label("Test2"));
+        System.out.println("Test2");
     }
 
     @Override
