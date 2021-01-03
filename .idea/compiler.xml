@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="VaadinProject" />
+        <module name="HaulmontProject" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="VaadinProject" target="1.8" />
+      <module name="HaulmontProject" target="10" />
     </bytecodeTargetLevel>
   </component>
 </project>
