@@ -45,7 +45,7 @@ public class CreditOfferView extends VerticalLayout implements View {
         headerLayout.addComponent(header);
         headerLayout.setComponentAlignment(header, Alignment.TOP_CENTER);
         headerLayout.addStyleName(ValoTheme.LAYOUT_CARD);
-        clientNativeSelect = new NativeSelect<>("Клиент", clientService.findAll());
+        clientNativeSelect = new NativeSelect<>("Клиент", clientService.findAllSort());
         clientNativeSelect.setRequiredIndicatorVisible(true);
         registerNewUserCheckBox = new CheckBox();
         registerNewUserCheckBox.setCaption("Клиента нет в списке");
@@ -69,7 +69,8 @@ public class CreditOfferView extends VerticalLayout implements View {
         getCreditOffer.addClickListener(clickEvent -> {
             try {
                 CreditOfferForm creditOfferForm = new CreditOfferForm(creditService,
-                        Long.parseLong(creditAmount.getValue()), creditPeriod.getValue());
+                        Long.parseLong(creditAmount.getValue()), creditPeriod.getValue(),
+                        clientNativeSelect.getValue());
                 getUI().addWindow(creditOfferForm);
             }catch (Exception e) {
                 Notification error = new Notification("Ошибка! Проверьте корректность введеных данных");

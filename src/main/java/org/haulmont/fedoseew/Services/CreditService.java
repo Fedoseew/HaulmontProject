@@ -31,10 +31,14 @@ public class CreditService {
 
     }
 
-    public List<Credit> findAll() {
+    public List<Credit> findAllSort() {
         List<Credit> credits = creditRepository.findAll();
         Collections.sort(credits);
         return credits;
+    }
+
+    public List<Credit> findAll() {
+        return creditRepository.findAll();
     }
 
     public Credit findCredit(Long creditAmount, Double creditProcent) {

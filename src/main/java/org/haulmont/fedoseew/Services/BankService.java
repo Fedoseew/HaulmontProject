@@ -27,7 +27,6 @@ public class BankService {
     }
 
     public void delete(Bank bank) {
-
         bankRepository.delete(bank);
         System.out.println("Delete client from bank");
     }

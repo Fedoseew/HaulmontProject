@@ -29,13 +29,17 @@ public class ClientService {
     public void delete(Client client) {
 
         clientRepository.delete(client);
-        System.out.println("Delete client");
+        System.out.println("Delete client " + client.toString());
     }
 
-    public List<Client> findAll() {
+    public List<Client> findAllSort() {
         List<Client> clients = clientRepository.findAll();
         Collections.sort(clients);
         return clients;
+    }
+
+    public List<Client> findAll() {
+        return clientRepository.findAll();
     }
 
     public Client findClient(String passport) {
@@ -45,6 +49,6 @@ public class ClientService {
     }
 
     public void save(Client client) { clientRepository.save(client);
-        System.out.println("Save a new client");}
+        System.out.println("Save a new client " + client.toString());}
 
 }
