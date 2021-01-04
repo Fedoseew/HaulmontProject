@@ -14,6 +14,7 @@ import org.haulmont.fedoseew.Models.Bank;
 import org.haulmont.fedoseew.Services.BankService;
 import org.haulmont.fedoseew.Services.ClientService;
 import org.haulmont.fedoseew.Services.CreditService;
+import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringView(name = "Bank")
@@ -33,7 +34,7 @@ public class BankView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-
+        MyUI.setStyleForButton(1);
         Page.getCurrent().setTitle("Bank");
         editButton.setEnabled(false);
         deleteButton.setEnabled(false);

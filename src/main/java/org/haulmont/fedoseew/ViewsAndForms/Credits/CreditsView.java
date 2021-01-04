@@ -11,6 +11,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import org.haulmont.fedoseew.Models.Client;
 import org.haulmont.fedoseew.Models.Credit;
 import org.haulmont.fedoseew.Services.CreditService;
+import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -28,8 +29,8 @@ public class CreditsView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
+        MyUI.setStyleForButton(2);
         Page.getCurrent().setTitle("Credits");
-
         editButton.setEnabled(false);
         deleteButton.setEnabled(false);
         deleteButton.setStyleName(ValoTheme.BUTTON_DANGER);

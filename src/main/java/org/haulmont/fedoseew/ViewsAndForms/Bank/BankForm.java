@@ -50,7 +50,7 @@ public class BankForm extends Window implements View {
 
         VerticalLayout form = new VerticalLayout();
 
-        clientNativeSelect = new NativeSelect<Client>(" Клиент", clients);
+        clientNativeSelect = new NativeSelect<>(" Клиент", clients);
         clientNativeSelect.setEmptySelectionAllowed(false);
         clientNativeSelect.setIcon(VaadinIcons.USER);
 

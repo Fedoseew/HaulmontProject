@@ -10,6 +10,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.haulmont.fedoseew.Models.Client;
 import org.haulmont.fedoseew.Services.ClientService;
+import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,7 @@ public class ClientsView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
+        MyUI.setStyleForButton(3);
         Page.getCurrent().setTitle("Clients");
         editButton.setEnabled(false);
         deleteButton.setEnabled(false);
