@@ -32,6 +32,7 @@ public class MyUI extends UI implements ViewDisplay {
         navigationBar.setWidth("100%");
 
         loginLayout.addComponent(createNavigationButton("Войти", "Login"));
+        loginLayout.getComponent(0).addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
 
         buttonsLayout.addComponents(
                 createNavigationButton("Главная", ""),
@@ -41,7 +42,7 @@ public class MyUI extends UI implements ViewDisplay {
                 createNavigationButton("Оформить кредит", "CreditOffer")
         );
         for(int i=1; i<buttonsLayout.getComponentCount(); i++)
-            buttonsLayout.getComponent(i).addStyleName(ValoTheme.BUTTON_BORDERLESS);
+            buttonsLayout.getComponent(i).addStyleName(ValoTheme.BUTTON_QUIET);
 
         buttonsLayout.getComponent(0).addStyleName(ValoTheme.BUTTON_PRIMARY);
 
