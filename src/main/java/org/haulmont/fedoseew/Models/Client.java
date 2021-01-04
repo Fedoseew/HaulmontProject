@@ -5,12 +5,13 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CLIENTS")
 @Data
-public class Client  extends AbstractModelClass  {
+public class Client extends AbstractModelClass implements Comparable<Client>, Serializable {
 
     @NotNull
     @Column(name = "FIRSTNAME")
@@ -39,5 +40,11 @@ public class Client  extends AbstractModelClass  {
     @Override
     public String toString() {
         return  this.lastName + " " + this.firstName + " " + this.middleName + ", Паспорт: " + this.passport;
+    }
+
+    @Override
+    public int compareTo(Client o) {
+        return this.getLastName().toLowerCase().
+                compareTo(o.getLastName().toLowerCase());
     }
 }

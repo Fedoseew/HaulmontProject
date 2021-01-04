@@ -1,5 +1,6 @@
 package org.haulmont.fedoseew.ViewsAndForms;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
@@ -46,6 +47,7 @@ public class MyUI extends UI implements ViewDisplay {
 
         navigationBar.addComponents(buttonsLayout, loginLayout);
         navigationBar.setComponentAlignment(loginLayout, Alignment.MIDDLE_RIGHT);
+
 
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();

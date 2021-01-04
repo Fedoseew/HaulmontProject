@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +32,9 @@ public class CreditService {
     }
 
     public List<Credit> findAll() {
-        return creditRepository.findAll();
+        List<Credit> credits = creditRepository.findAll();
+        Collections.sort(credits);
+        return credits;
     }
 
     public Credit findCredit(Long creditAmount, Double creditProcent) {

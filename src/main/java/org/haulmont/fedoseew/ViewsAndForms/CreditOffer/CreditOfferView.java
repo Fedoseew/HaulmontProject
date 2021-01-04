@@ -35,8 +35,6 @@ public class CreditOfferView extends VerticalLayout implements View {
 
     private final TextField creditAmount = new TextField("Сумма кредита");
 
-
-
     @PostConstruct
     void init() {
         MyUI.setStyleForButton(4);
@@ -46,6 +44,7 @@ public class CreditOfferView extends VerticalLayout implements View {
         headerLayout.setWidth("100%");
         headerLayout.addComponent(header);
         headerLayout.setComponentAlignment(header, Alignment.TOP_CENTER);
+        headerLayout.addStyleName(ValoTheme.LAYOUT_CARD);
         clientNativeSelect = new NativeSelect<>("Клиент", clientService.findAll());
         clientNativeSelect.setRequiredIndicatorVisible(true);
         registerNewUserCheckBox = new CheckBox();

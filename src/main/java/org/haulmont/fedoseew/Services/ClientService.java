@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +33,9 @@ public class ClientService {
     }
 
     public List<Client> findAll() {
-        return clientRepository.findAll();
+        List<Client> clients = clientRepository.findAll();
+        Collections.sort(clients);
+        return clients;
     }
 
     public Client findClient(String passport) {

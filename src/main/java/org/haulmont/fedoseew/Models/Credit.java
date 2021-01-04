@@ -7,12 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CREDITS")
 @Data
-public class Credit extends AbstractModelClass {
+public class Credit extends AbstractModelClass implements Comparable<Credit>, Serializable {
 
     @NotNull
     @Column(name = "CREDIT_LIMIT")
@@ -34,5 +35,10 @@ public class Credit extends AbstractModelClass {
     @Override
     public String toString() {
         return this.creditLimit + " руб., " + this.creditProcent + " %";
+    }
+
+    @Override
+    public int compareTo(Credit o) {
+        return o.getCreditLimit().compareTo(this.getCreditLimit());
     }
 }
