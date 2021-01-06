@@ -7,13 +7,17 @@ import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.SpringViewDisplay;
+import com.vaadin.spring.internal.SpringViewDisplayRegistrationBean;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+
+import java.io.Serializable;
+import java.util.Arrays;
 
 @Theme("valo")
 @SpringUI
 @SpringViewDisplay
-public class MyUI extends UI implements ViewDisplay {
+public class MyUI extends UI implements ViewDisplay, Serializable {
 
     final VerticalLayout root = new VerticalLayout();
     public static HorizontalLayout buttonsLayout;

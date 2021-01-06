@@ -34,6 +34,10 @@ public class CreditOfferService {
         return creditOfferRepository.findAllOffersForClient(bankID);
     }
 
+    public void deleteAllOffersForClient(long bankID) {
+        creditOfferRepository.deleteAllOffersForClient(bankID);
+    }
+
     public void save(CreditOffer creditOffer) {
         creditOfferRepository.save(creditOffer);
     }

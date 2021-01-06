@@ -130,7 +130,7 @@ public class ClientsView extends VerticalLayout implements View {
     private void passportFilter(HasValue.ValueChangeEvent<String> stringValueChangeEvent) {
         ListDataProvider<Client> dataProvider = (ListDataProvider<Client>) clientGrid.getDataProvider();
         dataProvider.setFilter(Client::getPassport, passport ->
-                (passport.toLowerCase()).contains(stringValueChangeEvent.getValue().toLowerCase()));
+                (passport.toString()).contains(stringValueChangeEvent.getValue().toLowerCase()));
     }
 
     private void nameFilter(HasValue.ValueChangeEvent<String> stringValueChangeEvent) {

@@ -42,7 +42,7 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client findClient(String passport) {
+    public Client findClient(long passport) {
         Client client = new Client ();
         client.setPassport(passport);
         return clientRepository.findOne(Example.of(client));

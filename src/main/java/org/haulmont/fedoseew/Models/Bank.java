@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "BANKS")
 @Data
-public class Bank extends AbstractModelClass implements Serializable {
+public class Bank extends AbstractModelClass {
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)

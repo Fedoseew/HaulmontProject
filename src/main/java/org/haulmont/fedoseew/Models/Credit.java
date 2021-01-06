@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "CREDITS")
 @Data
-public class Credit extends AbstractModelClass implements Comparable<Credit>, Serializable {
+public class Credit extends AbstractModelClass implements Comparable<Credit> {
 
     @NotNull
     @Column(name = "CREDIT_LIMIT")

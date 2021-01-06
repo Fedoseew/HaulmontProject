@@ -13,11 +13,12 @@ import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 import java.util.Arrays;
 
 
 @SpringView(name = "CreditOffer")
-public class CreditOfferView extends VerticalLayout implements View {
+public class CreditOfferView extends VerticalLayout implements View, Serializable {
     HorizontalLayout headerLayout = new HorizontalLayout();
     VerticalLayout mainLayout = new VerticalLayout();
 

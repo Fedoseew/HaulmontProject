@@ -43,7 +43,7 @@ public class RegistrationUserForm extends Window implements View {
             firstName.setValue(client.getFirstName());
             lastName.setValue(client.getLastName());
             middleName.setValue(client.getMiddleName());
-            passport.setValue(client.getPassport());
+            passport.setValue(String.valueOf(client.getPassport()));
 
         } catch (Exception ignored) {
         }
@@ -62,11 +62,11 @@ public class RegistrationUserForm extends Window implements View {
 
     private void save() {
         try {
-            if (clientService.findClient(passport.getValue()) == null) {
+            if (clientService.findClient(Long.parseLong(passport.getValue())) == null) {
                 client.setFirstName(firstName.getValue().trim());
                 client.setLastName(lastName.getValue().trim());
                 client.setMiddleName(middleName.getValue().trim());
-                client.setPassport(passport.getValue().trim());
+                client.setPassport(Long.parseLong(passport.getValue().trim()));
                 clientService.save(client);
                 Notification notification = new Notification("Успешно! Клиент добавлен",
                         Notification.Type.HUMANIZED_MESSAGE);

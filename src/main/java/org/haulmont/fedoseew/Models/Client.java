@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "CLIENTS")
 @Data
-public class Client extends AbstractModelClass implements Comparable<Client>, Serializable {
+public class Client extends AbstractModelClass implements Comparable<Client> {
 
     @NotNull
     @Column(name = "FIRSTNAME")
@@ -26,9 +26,9 @@ public class Client extends AbstractModelClass implements Comparable<Client>, Se
 
     @NotNull
     @Column(name = "PASSPORT", unique = true)
-    private String passport;
+    private Long passport;
 
-    public Client(String firstName, String lastName, String middleName, String passport) {
+    public Client(String firstName, String lastName, String middleName, Long passport) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;

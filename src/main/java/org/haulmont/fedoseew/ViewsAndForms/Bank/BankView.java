@@ -1,7 +1,5 @@
 package org.haulmont.fedoseew.ViewsAndForms.Bank;
 
-import javax.annotation.PostConstruct;
-
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -11,45 +9,52 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.haulmont.fedoseew.Models.Bank;
-import org.haulmont.fedoseew.Services.BankService;
-import org.haulmont.fedoseew.Services.ClientService;
-import org.haulmont.fedoseew.Services.CreditService;
+import org.haulmont.fedoseew.Models.CreditOffer;
+import org.haulmont.fedoseew.Services.*;
 import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringView(name = "Bank")
 public class BankView extends VerticalLayout implements View {
 
+    public static Grid<Bank> bankGrid = new Grid<>(Bank.class);
+    public static long bank_id;
+    private final Button addButton = new Button("Добавить");
+    private final Button deleteButton = new Button("Удалить");
+    private final Button viewCurrentCreditOffer = new Button("Детали кредита");
+    @Autowired
+    PaymentScheduleService paymentScheduleService;
     @Autowired
     private BankService bankService;
     @Autowired
     private ClientService clientService;
     @Autowired
     private CreditService creditService;
+    @Autowired
+    private CreditOfferService creditOfferService;
 
-    public static Grid<Bank> bankGrid = new Grid<>(Bank.class);
-    private final Button addButton = new Button("Добавить");
-    private final Button editButton = new Button("Изменить");
-    private final Button deleteButton = new Button("Удалить");
-    private final Button viewCurrentCreditOffer = new Button("Детали кредита");
-    public static long bank_id;
+    static void updateBankGrid(BankService bankService) {
+        bankGrid.setItems(bankService.findAll());
+    }
 
     @PostConstruct
     void init() {
+        bank_id = 0;
         MyUI.setStyleForButton(1);
         Page.getCurrent().setTitle("Bank");
-        editButton.setEnabled(false);
         deleteButton.setEnabled(false);
         viewCurrentCreditOffer.setEnabled(false);
         deleteButton.setStyleName(ValoTheme.BUTTON_DANGER);
-        editButton.setIcon(VaadinIcons.PENCIL);
         deleteButton.setIcon(VaadinIcons.MINUS);
         addButton.setIcon(VaadinIcons.PLUS);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
-        horizontalLayout.addComponents(addButton, editButton, viewCurrentCreditOffer, deleteButton);
+        horizontalLayout.addComponents(addButton, viewCurrentCreditOffer, deleteButton);
         horizontalLayout.setSizeFull();
-        horizontalLayout.setComponentAlignment(editButton, Alignment.TOP_CENTER);
         horizontalLayout.setComponentAlignment(deleteButton, Alignment.TOP_RIGHT);
         addComponent(horizontalLayout);
 
@@ -65,11 +70,9 @@ public class BankView extends VerticalLayout implements View {
     private void createButtonsListeners() {
         bankGrid.addSelectionListener(valueChangeEvent -> {
             if (!bankGrid.asSingleSelect().isEmpty()) {
-                editButton.setEnabled(true);
                 deleteButton.setEnabled(true);
                 viewCurrentCreditOffer.setEnabled(true);
             } else {
-                editButton.setEnabled(false);
                 deleteButton.setEnabled(false);
                 viewCurrentCreditOffer.setEnabled(false);
             }
@@ -81,23 +84,29 @@ public class BankView extends VerticalLayout implements View {
             getUI().addWindow(bankForm);
         });
 
-        editButton.addClickListener(e -> {
-            Bank bank = bankGrid.asSingleSelect().getValue();
-            BankForm bankForm = new BankForm(bankService, bank, clientService, creditService);
-            getUI().addWindow(bankForm);
-        });
 
         viewCurrentCreditOffer.addClickListener(e -> {
             bank_id = bankGrid.asSingleSelect().getValue().getId();
-           getUI().getNavigator().navigateTo("allOffers");
+            getUI().getNavigator().navigateTo("allOffers");
         });
-
         deleteButton.addClickListener(e -> {
             Bank bank = bankGrid.asSingleSelect().getValue();
+            bank_id = bankGrid.asSingleSelect().getValue().getId();
             try {
+                List<CreditOffer> creditOffers = creditOfferService.findAllOffersForClient(BankView.bank_id);
+                List<Long> idsOfPaymentSchedules = new ArrayList<>();
+
+                for (CreditOffer creditOffer : creditOffers)
+                    idsOfPaymentSchedules.add(creditOffer.getPaymentSchedule().getId());
+
+                creditOfferService.deleteAllOffersForClient(BankView.bank_id);
+
+                for (Long l : idsOfPaymentSchedules)
+                    paymentScheduleService.deleteById(l);
+
                 bankService.delete(bank);
                 updateBankGrid(bankService);
-                Notification notification = new Notification( bank.toString() + " был успешно удален",
+                Notification notification = new Notification(bank.toString() + " был успешно удален",
                         Notification.Type.WARNING_MESSAGE);
                 notification.setDelayMsec(1500);
                 notification.setPosition(Position.BOTTOM_CENTER);
@@ -106,13 +115,10 @@ public class BankView extends VerticalLayout implements View {
                 Notification notification = new Notification("Ошибка! Попробуйте еще раз позже",
                         Notification.Type.WARNING_MESSAGE);
                 notification.show(getUI().getPage());
+                deleteException.printStackTrace();
             }
         });
         updateBankGrid(bankService);
-    }
-
-    static void updateBankGrid(BankService bankService) {
-        bankGrid.setItems(bankService.findAll());
     }
 
     @Override

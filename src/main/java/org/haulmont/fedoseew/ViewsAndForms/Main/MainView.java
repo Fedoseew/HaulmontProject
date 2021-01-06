@@ -11,9 +11,10 @@ import com.vaadin.ui.themes.ValoTheme;
 import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 
 import java.io.File;
+import java.io.Serializable;
 
 @SpringView(name = "")
-public class MainView extends VerticalLayout implements View {
+public class MainView extends VerticalLayout implements View, Serializable {
 
     @PostConstruct
     void init() {
