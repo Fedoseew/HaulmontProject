@@ -56,6 +56,7 @@ public class BankView extends VerticalLayout implements View {
         horizontalLayout.addComponents(addButton, viewCurrentCreditOffer, deleteButton);
         horizontalLayout.setSizeFull();
         horizontalLayout.setComponentAlignment(deleteButton, Alignment.TOP_RIGHT);
+        horizontalLayout.setComponentAlignment(viewCurrentCreditOffer, Alignment.TOP_CENTER);
         addComponent(horizontalLayout);
 
         bankGrid.setSizeFull();
