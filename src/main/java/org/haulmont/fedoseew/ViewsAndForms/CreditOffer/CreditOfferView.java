@@ -8,8 +8,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.haulmont.fedoseew.Models.Client;
 import org.haulmont.fedoseew.Models.Credit;
-import org.haulmont.fedoseew.Services.ClientService;
-import org.haulmont.fedoseew.Services.CreditService;
+import org.haulmont.fedoseew.Services.*;
 import org.haulmont.fedoseew.ViewsAndForms.MyUI;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +31,12 @@ public class CreditOfferView extends VerticalLayout implements View {
     private ClientService clientService;
     @Autowired
     private CreditService creditService;
+    @Autowired
+    private PaymentScheduleService scheduleService;
+    @Autowired
+    CreditOfferService creditOfferService;
+    @Autowired
+    BankService bankService;
 
     private final TextField creditAmount = new TextField("Сумма кредита");
 
@@ -70,7 +75,7 @@ public class CreditOfferView extends VerticalLayout implements View {
             try {
                 CreditOfferForm creditOfferForm = new CreditOfferForm(creditService,
                         Long.parseLong(creditAmount.getValue()), creditPeriod.getValue(),
-                        clientNativeSelect.getValue());
+                        clientNativeSelect.getValue(), creditOfferService, scheduleService, bankService);
                 getUI().addWindow(creditOfferForm);
             }catch (Exception e) {
                 Notification error = new Notification("Ошибка! Проверьте корректность введеных данных");

@@ -34,14 +34,10 @@ public class MainView extends VerticalLayout implements View {
         Image clients = new Image("", clientImageResource);
         Image offer = new Image("", offerImageResource);
 
-        bank.setWidth("250px");
-        bank.setHeight("250px");
-        credit.setWidth("250px");
-        credit.setHeight("250px");
-        clients.setWidth("250px");
-        clients.setHeight("250px");
-        offer.setWidth("250px");
-        offer.setHeight("250px");
+        bank.setWidth("70%");
+        credit.setWidth("70%");
+        clients.setWidth("70%");
+        offer.setWidth("70%");
 
         Label bankLabel = new Label("Банк");
         bankLabel.addStyleName(ValoTheme.LABEL_BOLD);

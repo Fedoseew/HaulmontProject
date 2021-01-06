@@ -36,7 +36,9 @@ public class BankService {
     }
 
     public Bank findBank(Client client, Credit credit) {
-        Bank bank = new Bank(client, credit);
+        Bank bank = new Bank();
+        bank.setClient(client);
+        bank.setCreditInBank(credit);
         return bankRepository.findOne(Example.of(bank));
     }
 
